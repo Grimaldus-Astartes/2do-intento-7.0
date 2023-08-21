@@ -4,20 +4,20 @@ using Quiero_revisar.Service;
 
 namespace Quiero_revisar.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/catalogos")]
     [ApiController]
-    public class CatalogoController : ControllerBase
+    public class CatalogosController : ControllerBase
     {
         private readonly ICatalogoService _catalogoService;
 
-        public CatalogoController(ICatalogoService catalogoService)
+        public CatalogosController(ICatalogoService catalogoService)
         {
             this._catalogoService = catalogoService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("all")]
         [ProducesResponseType(200)]
-        public async Task< ActionResult> Get()
+        public async Task<ActionResult> Get()
         {
             return StatusCode(200, await _catalogoService.GetAllCatalogosAsync());
         }

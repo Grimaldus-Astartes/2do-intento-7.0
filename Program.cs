@@ -24,7 +24,7 @@ builder.Services.AddSingleton(provider =>
         config.AddProfile<AutoMapperProfile>();
         config.ConstructServicesUsing(type =>
         ActivatorUtilities.GetServiceOrCreateInstance(provider, type));
-    });
+    }).CreateMapper();
 });
 #endregion
 
