@@ -8,7 +8,10 @@ using Quiero_revisar.Service.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// No tenias esta linea de codigo, creo que por esto los controllers no se aniadian al contexto de la app
 builder.Services.AddControllers();
+
+// Swagger para testear los endpoints
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
