@@ -1,8 +1,11 @@
-﻿namespace Quiero_revisar.Data_Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Quiero_revisar.Data_Entities
 {
     public class CatalogoEntity
     {
-        public string idCatalogo { get; set; }
-        public string descripcion {get ; set;}
+        [Key]
+        public int Id { get; set; }
+        public string descripcion { get; set; }
     }
 }

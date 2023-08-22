@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Quiero_revisar;
 using Quiero_revisar.Data_Context;
 using Quiero_revisar.Service;
@@ -7,6 +8,16 @@ using Quiero_revisar.Service.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Esatto backend endpoints",
+        Description = "This is a documentation for endpoints in esatto project.",
+    });
+});
 // Add services to the container.
 #region establecer contexto base de datos
 builder.Services.AddDbContext<TiendaComics>(
@@ -28,7 +39,6 @@ builder.Services.AddSingleton(provider =>
 });
 #endregion
 
-builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ICatalogoService, CatalogoService>();
 //builder.Services.AddTransient<ICatalogoService, CatalogoService>();
 
@@ -40,16 +50,18 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+else
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+app.MapControllers();
 
-app.MapFallbackToFile("index.html");
 
 app.Run();

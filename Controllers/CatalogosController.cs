@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Quiero_revisar.Service;
 
 namespace Quiero_revisar.Controllers
 {
-    [Route("api/catalogos")]
+    [Route("[controller]")]
     [ApiController]
     public class CatalogosController : ControllerBase
     {
@@ -15,9 +14,8 @@ namespace Quiero_revisar.Controllers
             this._catalogoService = catalogoService;
         }
 
-        [HttpGet("all")]
-        [ProducesResponseType(200)]
-        public async Task<ActionResult> Get()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
             return StatusCode(200, await _catalogoService.GetAllCatalogosAsync());
         }

@@ -10,7 +10,8 @@ namespace Quiero_revisar.Service.Implementation
         private readonly TiendaComics _dbContextService;
         private readonly IMapper _mapperService;
 
-        public CatalogoService(TiendaComics dbContextService, IMapper mapperService) {
+        public CatalogoService(TiendaComics dbContextService, IMapper mapperService)
+        {
             this._dbContextService = dbContextService;
             this._mapperService = mapperService;
         }
@@ -20,6 +21,6 @@ namespace Quiero_revisar.Service.Implementation
             return _mapperService
                 .Map<IEnumerable<CatalogoViewModel>>(await _dbContextService.Catalogos.ToListAsync());
         }
-        
+
     }
 }
